@@ -8,17 +8,14 @@ import { sessionMiddleware } from "./Middleware/Sessions.js";
 config();
 
 const server = express();
-server.use(json({ limit: "10mb" }));
-
 server.use(cors({ origin: process.env.FRONT_END, credentials: true }));
 
+server.use(json({ limit: "10mb" }));
 server.use("/todos", sessionMiddleware, todosRouter);
 server.use("/users", sessionMiddleware, userRouter);
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
-  console.log(process.env.FRONT_END);
-
   console.log(`Server is running on port ${PORT}`);
 });
 server.use((req, res, next) => {

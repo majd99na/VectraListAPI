@@ -6,10 +6,11 @@ import {
   register,
   signIn,
 } from "../Controllers/UsersController.js";
+import { sessionMiddleware } from "../Middleware/Sessions.js";
 const router = express.Router();
 router.get("/", getAllUsers);
 router.post("/signup", register);
-router.post("/signin", signIn);
-router.get("/status", getStatus);
+router.post("/signin", sessionMiddleware, signIn);
+router.get("/status", sessionMiddleware, getStatus);
 router.post("/signout", logOut);
 export default router;
