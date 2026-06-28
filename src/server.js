@@ -9,7 +9,6 @@ config();
 
 const server = express();
 server.use(json({ limit: "10mb" }));
-console.log(process.env.FRONT_END);
 
 server.use(cors({ origin: process.env.FRONT_END, credentials: true }));
 
@@ -18,6 +17,8 @@ server.use("/users", sessionMiddleware, userRouter);
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
+  console.log(process.env.FRONT_END);
+
   console.log(`Server is running on port ${PORT}`);
 });
 server.use((req, res, next) => {
