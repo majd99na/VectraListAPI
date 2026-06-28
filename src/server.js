@@ -8,6 +8,7 @@ import { sessionMiddleware } from "./Middleware/Sessions.js";
 config();
 
 const server = express();
+server.set("trust proxy", 1);
 server.use(cors({ origin: process.env.FRONT_END, credentials: true }));
 
 server.use(json({ limit: "10mb" }));

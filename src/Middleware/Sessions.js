@@ -2,9 +2,6 @@ import connectPgSimple from "connect-pg-simple";
 import session from "express-session";
 import { pool } from "../DB/db.js";
 const PgSession = connectPgSimple(session);
-
-console.log("HELLO", process.env.FRONT_END);
-
 export const sessionMiddleware = session({
   // proxy: true,
   name: "TodosAppSession",
@@ -14,8 +11,8 @@ export const sessionMiddleware = session({
   rolling: false,
   cookie: {
     maxAge: 60000 * 60 * 24 * 7,
-    secure: true,
-    sameSite: "none",
+    secure: process.env.ENVIRONMENT === "PRODUCTION" ? true : false,
+    sameSite: process.env.ENVIRONMENT === "PRODUCTION" ? "none" : "",
     httpOnly: true,
   },
   store: new PgSession({ pool, tableName: "sessions" }),
