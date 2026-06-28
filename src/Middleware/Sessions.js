@@ -11,8 +11,8 @@ export const sessionMiddleware = session({
   rolling: false,
   cookie: {
     maxAge: 60000 * 60 * 24 * 7,
-    secure: process.env.ENVIRONMENT === "PRODUCTION" ? true : false,
-    sameSite: process.env.ENVIRONMENT === "PRODUCTION" ? "none" : "",
+    secure: true,
+    sameSite: "none",
     httpOnly: true,
   },
   store: new PgSession({ pool, tableName: "sessions" }),
