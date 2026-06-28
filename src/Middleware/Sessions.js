@@ -2,6 +2,9 @@ import connectPgSimple from "connect-pg-simple";
 import session from "express-session";
 import { pool } from "../DB/db.js";
 const PgSession = connectPgSimple(session);
+
+console.log("HELLO", process.env.FRONT_END);
+
 export const sessionMiddleware = session({
   // proxy: true,
   name: "TodosAppSession",
