@@ -9,7 +9,10 @@ config();
 
 const server = express();
 server.use(json({ limit: "10mb" }));
+console.log(process.env.FRONT_END);
+
 server.use(cors({ origin: process.env.FRONT_END, credentials: true }));
+
 server.use("/todos", sessionMiddleware, todosRouter);
 server.use("/users", sessionMiddleware, userRouter);
 const PORT = process.env.PORT || 3000;
